@@ -49,6 +49,14 @@ tetris.move = function(direction) {
             }
         }
     }
+
+    // Update origin coordinates
+    if (direction === 'right') {
+        this.origin.col++;
+    } else if (direction === 'left') {
+        this.origin.col--;
+    }
+
     this.fillCells(this.currentCoor, 'black');
     if (reverse && direction === 'left') {
         this.move('right');
@@ -61,6 +69,7 @@ tetris.move = function(direction) {
 //Rotate current shape
 tetris.rotate = function(){
    var reverse = false;
+   var lastShape = this.currentShape;
    this.fillCells(this.currentCoor,'');
 
    if(this.currentShape === 'L'){
@@ -102,7 +111,14 @@ tetris.rotate = function(){
    }
 
    this.currentCoor = this.shapeToCoor(this.currentShape,this.origin);
-   this.fillCells(this.currentCoor,'black');
+
+   for (var i = 0; i < this.currentCoor.length; i++) {
+       if (this.currentCoor[i].col > 9 || this.currentCoor[i].col < 0) {
+           this.currentShape = lastShape;
+       }
+   }
+   this.currentCoor = this.shapeToCoor(this.currentShape, this.origin);
+   this.fillCells(this.currentCoor, 'black');
 }
 
 //Write shapes to coordinates
