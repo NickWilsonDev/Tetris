@@ -75,8 +75,12 @@ tetris.emptyFullRow = function() {
                 $newCoor.attr('bgcolor', $coor.attr('bgcolor'));
             }
         }
-        if (rowIsFull) {
+        if (rowIsFull) {  
             drops++;
+            var score = parseInt(document.getElementById("score").innerHTML, 10);
+            //alert(score);
+            score = score + 10;
+            document.getElementById("score").innerHTML = score;
         }
     }
 }
