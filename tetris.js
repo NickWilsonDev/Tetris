@@ -89,8 +89,13 @@ tetris.emptyFullRow = function() {
 tetris.spawn = function() {
     var random = Math.floor(Math.random() * 7);
     var shapeArray = ['L', 'J', 'I', 'O', 'S', 'T', 'Z'];
+
     this.currentShape = shapeArray[random];
+    //this.currentShape = nextShape;
+
+    //this.nextShape = shapeArray[random];
     this.origin = {row:2, col:5};
+
     this.currentCoor = this.shapeToCoor(this.currentShape, this.origin);
 }
 
@@ -162,7 +167,7 @@ tetris.rotate = function(){
        this.currentShape = 'T';
    }
 
-   this.currentCoor = this.shapeToCoor(this.currentShape,this.origin);
+   this.currentCoor = this.shapeToCoor(this.currentShape, this.origin);
 
    for (var i = 0; i < this.currentCoor.length; i++) {
          if (this.ifReverse()) {
